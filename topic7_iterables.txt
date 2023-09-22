@@ -1,0 +1,234 @@
+//1.Write a Dart program that generates the running product of elements in an iterable.
+// void main() {
+//   List<int> numbers = [3, 4, 5, 6, 7];
+//   List<int> running = generateRunningProduct(numbers);
+
+//   print("num-$numbers");
+//   print("running-$running");
+// }
+
+// List<int> generateRunningProduct(Iterable<int> iterable) {
+//   int runningProduct = 1;
+
+//   List<int> result = iterable.map((number) {
+//     runningProduct *= number;
+//     return runningProduct;
+//   }).toList();
+
+//   return result;
+// }
+
+
+//2.Write a Dart program to generate the maximum and minimum values of the elements of an iterable.
+// void main() {
+//   List<int> numbers = [3, 4, 7, 2, 3, 5];
+
+//   int maximum = findMaximum(numbers);
+//   int minimum = findMinimum(numbers);
+
+//   print("nums-$numbers");
+//   print("max-$maximum");
+//   print("min-$minimum");
+// }
+
+// int findMaximum(Iterable<int> iterable) {
+//   if (iterable.isEmpty) {
+//     throw ArgumentError("empty");
+//   }
+
+//   return iterable.reduce((max, element) => max > element ? max : element);
+// }
+
+// int findMinimum(Iterable<int> iterable) {
+//   if (iterable.isEmpty) {
+//     throw ArgumentError("empty");
+//   }
+
+//   return iterable.reduce((min, element) => min < element ? min : element);
+// }
+
+
+//3.Write a Dart program to construct an infinite iterator that returns evenly spaced values starting with a specified number and step.
+// Iterable<double> infiniteRange(double start, double step) sync* {
+//   double value = start;
+//   while (true) {
+//     yield value;
+//     value += step;
+//   }
+// }
+
+// void main() {
+//   double start = 4.0;
+//   double step = 1;
+//   int count = 10; 
+
+//   final iterator = infiniteRange(start, step).iterator;
+
+//   for (int i = 0; i < count; i++) {
+//     print(iterator.current);
+//     iterator.moveNext();
+//   }
+// }
+
+
+//4.Write a Dart program to make an iterator that drops elements from the iterable as soon as an element is a positive number.
+// Iterable<int> dropPositive(Iterable<int> iterable) sync* {
+//   for (int element in iterable) {
+//     if (element <= 0) {
+//       yield element;
+//     } else {
+//       break; 
+//     }
+//   }
+// }
+
+// void main() {
+//   List<int> numbers = [-5, -2, -1, 6, 9];
+
+//   Iterable<int> filteredNumbers = dropPositive(numbers);
+
+//   print("$numbers");
+//   print("$filteredNumbers");
+// }
+
+
+
+
+
+
+//6.Write a Dart program to read a given string character by character and compress repeated characters by storing the length of those character(s).
+// String compressString(String input) {
+//   if (input.isEmpty) return input;
+//   StringBuffer compressed = StringBuffer();
+//   int count = 1;
+//   for (int i = 1; i < input.length; i++) {
+//     if (input[i] == input[i - 1]) {
+//       count++;
+//     } else {
+//       compressed.write(input[i - 1]);
+//       if (count > 1) {
+//         compressed.write(count);
+//       }
+//       count = 1;
+//     }
+//   }
+//   compressed.write(input[input.length - 1]);
+//   if (count > 1) {
+//     compressed.write(count);
+//   }
+//   return compressed.toString();
+// }
+// void main() {
+//   String input = "ulbosssssyn";
+//   String compressed = compressString(input);
+
+//   print("$input");
+//   print("$compressed");
+// }
+
+
+//7.Write a Dart program that iterates the integers from 1 to a given number and prints "Fizz" for multiples of three, prints "Buzz" for multiples of five, and prints "FizzBuzz" for multiples of both three and five using the itertools module
+//   void main() {
+//   final int givenNumber = 100;
+//   final Iterable<int> numbers = Iterable<int>.generate(givenNumber, (index) => index + 1);
+//   numbers.forEach((int i) {
+//     if (i % 3 == 0 && i % 5 == 0) {
+//       print("FizzBuzz");
+//     } else if (i % 3 == 0) {
+//       print("Fizz");
+//     } else if (i % 5 == 0) {
+//       print("Buzz");
+//     } else {
+//       print(i);
+//     }
+//   });
+// }
+
+
+//8.Write a DaWrite a Dart program to find the years between 2000 and 2150 when the 25th of December is a Sunday.
+//   void main() {
+//   final Iterable<int> years = Iterable<int>.generate(151, (index) => 2000 + index);
+//   final Iterable<int> yearsWithSundayChristmas = years.where((year) {
+//     final DateTime christmasDate = DateTime(year, 12, 25);
+//     return christmasDate.weekday == DateTime.sunday;
+//   });
+
+//   print("25th of December is a Sunday in:");
+//   yearsWithSundayChristmas.forEach((year) {
+//     print(year);
+//   });
+// }
+
+// 11. Write a Dart program to find the maximum length of a substring in a given string where all the characters of the // int maxSameCharLength(String input) {
+//   if (input.isEmpty) {
+//     return 0;
+//   }
+//   int maxLength = 1;
+//   final Iterable<String> characters = input.split('');
+//   int currentLength = 1;
+//   for (int i = 1; i < characters.length; i++) {
+//     if (characters.elementAt(i) == characters.elementAt(i - 1)) {
+//       currentLength++;
+//     } else {
+//       currentLength = 1;
+//     }
+//     if (currentLength > maxLength) {
+//       maxLength = currentLength;
+//     }
+//   }
+//   return maxLength;
+// }
+// void main() {
+//   final String input = "ulbossssyn";
+
+//   final int maxLength = maxSameCharLength(input);
+
+//   print("$maxLength");
+// }
+
+//12.Write a Dart program to find the first two elements of a given list whose sum is equal to a given value. Use the itertools module to solve the problem.
+// List<int> findtwo(List<int> numbers, int targetSum) {
+//   Set<int> seenNumbers = {};
+
+//   for (int num in numbers) {
+//     int complement = targetSum - num;
+
+//     if (seenNumbers.contains(complement)) {
+//       return [complement, num];
+//     }
+
+//     seenNumbers.add(num);
+//   }
+
+//   return [];
+// }
+
+// void main() {
+//   List<int> numbers = [1, 3, 1, 15];
+//   int targetSum = 4;
+
+//   List<int> result = findtwo(numbers, targetSum);
+
+//   if (result.isNotEmpty) {
+//     print("$targetSum : ${result[0]} and ${result[1]}");
+//   } else {
+//     print("No");
+//   }
+// }
+
+
+//13.Write a Dart program to find the maximum difference between pairs in a given list.
+// int maxDifference(List<int> numbers) {
+//   if (numbers.isEmpty) {
+//     return 0; 
+//   }
+//   numbers.sort(); 
+//   int maxDiff = numbers.last - numbers.first;
+
+//   return maxDiff;
+// }
+// void main() {
+//   final List<int> numberList = [4, 1, 6, 2, 3, 9];
+//   final int maxPairDifference = maxDifference(numberList);
+//   print("max-$maxPairDifference");
+// }
